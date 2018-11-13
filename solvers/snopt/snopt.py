@@ -81,7 +81,6 @@ def snopta(usrfun,n,nF,**kwargs):
     options    contains the user options for the SNOPT solver
 
     """
-
     name     = kwargs.get('name','')
     usropts  = kwargs.get('options',SNOPT_options())
 
@@ -249,6 +248,9 @@ def snopta(usrfun,n,nF,**kwargs):
                     print(' Could not allocate memory for SNOPT')
                     return info
                 snwork.work_resize(mincw,miniw,minrw)
+
+            if info == 121:
+                return None
 
     else:
         iAfun = np.array([1]) if neA == 0 else iAfun + 1
